@@ -15,6 +15,8 @@
 //    return view('index');
 //});
 
-Route::get('/','PostController@index');
+//Route::get('/','PostController@index');
 
-Route::get('/{key}','PostController@post');
+//Route::get('/{key}','PostController@post');
+
+Route::get('blog', 'PostsController@index');

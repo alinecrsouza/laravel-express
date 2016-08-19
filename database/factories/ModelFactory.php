@@ -26,3 +26,10 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
         'content' => $faker->paragraph
     ];
 });
+
+$factory->define(App\Tag::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word
+    ];
+});
+

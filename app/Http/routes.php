@@ -19,4 +19,5 @@
 
 //Route::get('/{key}','PostController@post');
 
-Route::get('blog', 'PostsController@index');
+Route::get('/', 'PostsController@index');
+Route::get('admin', 'PostsAdminController@index');

@@ -19,6 +19,8 @@
     @endforeach
 </table>
 
+{!! $posts->render() !!}
+
 
 @endsection
 

@@ -1,6 +1,29 @@
-/vendor
-/node_modules
-/public/storage
-Homestead.yaml
-Homestead.json
-.env
+#ant specific
+dist/
+build/
+
+#netbeans specific
+core
+nbproject/*
+
+
+#java specific
+*.class
+
+#general swap/backup files
+*.so
+*.log
+*.out
+*~
+*.swp
+*.DS_Store
+*.lock
+/Front-end Frameworks - Bootstrap/HTML5Application/nbproject/private/
+/Front-end Frameworks - Bootstrap/conFusion/nbproject/private/
+
+
+#node modules
+**/node_modules/*
+
+#.env
+*.env

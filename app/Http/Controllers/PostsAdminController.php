@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Tag;
 use App\Http\Requests\PostRequest;
 
 class PostsAdminController extends Controller {
@@ -23,8 +24,10 @@ class PostsAdminController extends Controller {
     }
     
     public function store(PostRequest $request) {
-        //dd($request->all());
-        $this->post->create($request->all());
+        //dd($request->all());        
+        $post = $this->post->create($request->all());
+        $post->tags()->sync($this->getTagsIds($request->tags));
+        
         return redirect()->route('admin.posts.index');
     }
     
@@ -35,13 +38,29 @@ class PostsAdminController extends Controller {
     }
     
     public function update($id, PostRequest $request) {
+        //this line does not work because returns true or false
+        //$post = $this->post->find($id)->update($request->all());
         $this->post->find($id)->update($request->all());
+        $post = $this->post->find($id);
+        $post->tags()->sync($this->getTagsIds($request->tags));
         return redirect()->route('admin.posts.index');
     }
     
     public function destroy($id) {
         $this->post->find($id)->delete();
         return redirect()->route('admin.posts.index');
+    }
+    
+    private function getTagsIds($tags) {
+        //array_map removes spaces and array_filter removes empty strings
+        $tagList = array_filter(array_map('trim', explode(',', $tags)));
+        //dd($tags);
+        $tagsIDs=[];
+        foreach($tagList as $tagName){
+            $tagsIDs[] = Tag::firstOrCreate(['name'=> $tagName])->id;
+        }
+        //dd($tagsIDs);
+        return $tagsIDs;
     }
 
 }

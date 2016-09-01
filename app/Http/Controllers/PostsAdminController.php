@@ -11,8 +11,14 @@ class PostsAdminController extends Controller {
     private $post;
 
     public function __construct(Post $post) {
+        $this->middleware('auth');
         $this->post = $post;
     }
+    
+//    public function auth() {
+//        $user = \App\User::find(1);
+//        Auth::login($user);
+//    }
 
     public function index() {
         $posts = $this->post->paginate(5);
